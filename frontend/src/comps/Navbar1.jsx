@@ -3,7 +3,6 @@ import { AiOutlineSmile } from "react-icons/ai";
 import { FaGraduationCap } from "react-icons/fa6";
 import { FcNews } from "react-icons/fc";
 import { GoRocket } from "react-icons/go";
-import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function Navbar1() {
@@ -84,7 +83,7 @@ export default function Navbar1() {
         </div>
 
         {/* Logo */}
-        <div className="navbar-start flex flex-2">
+        <div className="navbar-start hidden md:flex lg:flex">
           <div className="btn btn-ghost text-xl">
             <Link to="/">TechTweet</Link>
           </div>
