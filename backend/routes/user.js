@@ -24,7 +24,7 @@ userRouter.post("/login", async (req, res) => {
 
 userRouter.post("/register", async (req, res) => {
   const { name, email, password, phone, profile_pic, about } = req.body;
-  if ((!name || !email || !password, !phone)) {
+  if (!name || !email || !password || !phone) {
     return res.status(402).send("Missing required fields");
   }
   try {
@@ -37,8 +37,9 @@ userRouter.post("/register", async (req, res) => {
       return res.status(422).send("Error registering user. Try Again!");
     }
     user.save();
-    return res.status(200).send("User registered successfully! - " + user._id);
+    return res.status(200).send({ message: "User registered", id: user.id });
   } catch (err) {
+    console.log(err);
     return res.status(409).send("An error occurred!");
   }
 });
@@ -56,12 +57,15 @@ userRouter.patch("/update/:id", async (req, res) => {
   }
 });
 
-userRouter.delete("/delete/:id", (req, res) => {
-  const _id = req.params;
+userRouter.delete("/delete/:id", async (req, res) => {
+  const { _id } = req.params;
+
   try {
-    User.deleteOne({ _id });
+    const r = await User.deleteOne({ id: _id });
+    console.log(r);
     return res.status(200).send("User deleted! - " + _id);
   } catch (err) {
+    console.log(err);
     return res.status(501).send("An error occurred!");
   }
 });
