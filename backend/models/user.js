@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { userRef } from "../utils/strings";
+import { userRef } from "../utils/strings.js";
 
 const userSchema = mongoose.Schema({
   name: { type: String, required: true },
