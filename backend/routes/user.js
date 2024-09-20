@@ -44,10 +44,11 @@ userRouter.post("/register", async (req, res) => {
 });
 
 userRouter.patch("/update/:id", async (req, res) => {
-  const { name, password, phone, about } = req.body;
+  const { ...unwantedData } = req.body;
   const id = req.params;
+  //   console.log(name, password, phone, about);
   try {
-    await User.updateOne({ id }, { updatedData });
+    await User.updateOne({ id }, { unwantedData });
     return res.status(200).send("User updated - " + id);
   } catch (err) {
     console.log(err);
