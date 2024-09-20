@@ -11,9 +11,10 @@ postRouter.get("/", async(req, res) => {
 });
 
 postRouter.post("/create", async(req, res) => {
-    const { caption, type, tags, photos } = req.body;
+    const { caption, type, tags, photos,user_id } = req.body;
 
     const newPost = new Post({
+        user_id,
         caption,
         type,
         tags,
