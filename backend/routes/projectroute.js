@@ -25,6 +25,7 @@ projectRouter.post("/create", async (req, res) => {
     techstack,
     workflow,
     user_id,
+    github_link,
   } = req.body;
   const newProject = new Project({
     projectTitle,
@@ -32,14 +33,22 @@ projectRouter.post("/create", async (req, res) => {
     tags,
     techstack,
     workflow,
+    user_id,
+    github_link,
   });
   await newProject.save();
   res.json(newProject);
 });
 
 projectRouter.patch("/update/:id", async (req, res) => {
-  const { projectTitle, projectDescription, tags, techstack, workflow } =
-    req.body;
+  const {
+    projectTitle,
+    projectDescription,
+    tags,
+    techstack,
+    workflow,
+    github_link,
+  } = req.body;
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ message: "No post with that id" });
@@ -53,6 +62,8 @@ projectRouter.patch("/update/:id", async (req, res) => {
   post.tags = tags;
   post.techstack = techstack;
   post.workflow = workflow;
+  post.github_link = github_link;
+
   await post.save();
   res.json(post);
 });
@@ -77,11 +88,11 @@ projectRouter.post("/like/:id", async (req, res) => {
 
   const porj = await Project.findById(id);
   if (!porj) {
-    return res.status(404).json({ message: "porj not found" });
+    return res.status(404).json({ message: "Post not found" });
   }
 
   if (porj.liked_by.includes(req.body.user_id)) {
-    return res.status(400).json({ message: "porj already liked" });
+    return res.status(400).json({ message: "Post already liked" });
   }
 
   porj.likes += 1;
