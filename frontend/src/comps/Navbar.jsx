@@ -64,7 +64,7 @@ export default function Navbar() {
                             <span className="badge badge-xs badge-primary indicator-item"></span>
                         </div>
                     </button>
-                </div>
+                </div> 
             </div>
         </div>
     )
