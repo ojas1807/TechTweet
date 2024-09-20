@@ -59,7 +59,7 @@ userRouter.patch("/update/:id", async (req, res) => {
 
 userRouter.delete("/delete/:id", async (req, res) => {
   const { _id } = req.params;
-
+ 
   try {
     const r = await User.deleteOne({ id: _id });
     console.log(r);

@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema(
     profile_pic: { type: String, default: "" },
     about: { type: String, default: "" },
     posts: [{ type: mongoose.Schema.ObjectId, ref: postRef }],
-    liked_post: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    liked_post: [{ type: mongoose.Schema.Types.ObjectId, ref: userRef }],
   },
   { timestamps: true }
 );
