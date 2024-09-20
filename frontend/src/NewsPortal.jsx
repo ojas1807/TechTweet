@@ -4,20 +4,12 @@ const NewsPortal = () => {
     return (
         <div className="bg-gray-100">
             {/* Navbar */}
-            <nav className="bg-white shadow-md sticky top-0 ">
-                <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-                    <div className="text-2xl font-bold text-blue-600">News Portal</div>
-                    <div>
-                        <ul className="flex space-x-6">
-                            <li><a href="#" className="hover:text-blue-600">Home</a></li>
-                            <li><a href="#" className="hover:text-blue-600">World</a></li>
-                            <li><a href="#" className="hover:text-blue-600">Politics</a></li>
-                            <li><a href="#" className="hover:text-blue-600">Business</a></li>
-                            <li><a href="#" className="hover:text-blue-600">Technology</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <header className="text-center mb-4 bg-[#81CEEB] py-8">
+                <h1 className="text-4xl font-bold text-black" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+                    <span className="bg-gradient-to-r from-blue-400 to-teal-500 text-black p-2 rounded">Latest Updates</span>
+                </h1>
+                <p className="text-lg text-black mt-2">Get the latest updates on what's happening</p>
+            </header>
 
             {/* Carousel */}
             <div className="container mx-auto mt-4">
