@@ -3,9 +3,6 @@ import User from "../models/user.js";
 
 const userRouter = Router();
 
-userRouter.get("/", (req, res) => {
-  res.json("List of users");
-});
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -14,7 +11,6 @@ userRouter.post("/login", async (req, res) => {
   }
   try {
     const currentUser = await User.findOne({ email });
-    console.log(currentUser);
     if (!currentUser) {
       return res.status(404).send("User not found");
     }
@@ -47,14 +43,16 @@ userRouter.post("/register", async (req, res) => {
   }
 });
 
-userRouter.patch("/update/:id", (req, res) => {
-  const { ...updatedData } = req.body;
+userRouter.patch("/update/:id", async (req, res) => {
+  const { ...unwantedData } = req.body;
   const id = req.params;
+  //   console.log(name, password, phone, about);
   try {
-    User.updateOne({ id }, { updatedData });
+    await User.updateOne({ id }, { unwantedData });
     return res.status(200).send("User updated - " + id);
   } catch (err) {
-    return res.status(501).send("An error occurred!");
+    console.log(err);
+    return res.status(501).send(err);
   }
 });
 
