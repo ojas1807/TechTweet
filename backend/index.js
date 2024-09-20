@@ -2,23 +2,69 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import { configDotenv } from "dotenv";
-import userRouter from "./routes/user.js";
+import { v2 as cloudinary } from 'cloudinary';
+// import { uploadurl } from "./upload/cloudnary.js";
+
+// Return "https" URLs by setting secure: true
 
 const app = express();
+app.use(express.json());
 configDotenv();
 const port = process.env.PORT || 3000;
+cloudinary.config({
+  cloud_name: "dqeuyazh4",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View Credentials' below to copy your API secret
+});
 
+
+// Log the configuration
+console.log(cloudinary.config());
 mongoose.connect(process.env.MONGO_URL).then(() => {
-  app.use(express.json());
-  app.use(cors());
-  app.use(express.urlencoded({ extended: false }));
-  app.get("/", (req, res) => {
-    res.send("Hello World!");
+  app.get("/", (req, res) => { 
+    res.send("Hello World!"); 
   });
+ 
+app.post("/upload", async(req,res)=>{
 
-  app.use("/users", userRouter);
+    
+
+  // Use the uploaded file's name as the asset's public ID and 
+  // allow overwriting the asset with new versions
+  const options = {
+    use_filename: true,
+    unique_filename: false,
+    overwrite: true,
+  }; 
+
+  try {
+    const result = await cloudinary.uploader.upload(req.body.image, options);
+    console.log(result);
+    res.json(result.url);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error uploading image' });
+  }
+
+
+}) 
+
+app.post("/uploadany",async(req,res)=>{
+  console.log("requsest came here ")
+const toupload=req.body.file;
+try {
+  const result= await cloudinary.uploader.upload(toupload);
+  console.log(result)
+res.json(result.url);
+} catch (error) {
+  console.log(error)
+  res.status(500).json({ message: 'Error uploading file' });
+
+}
+
+})
 
   app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.log(`App listening on port ${port}`); 
   });
 });

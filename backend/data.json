@@ -1,0 +1,50 @@
+[
+  {
+  "name":"Sapna Mishra",
+  "email":"mishrasapnaa01@gmail.com",
+  "phone":8169228739,
+  "password": "22104190",
+  "profile_pic":"",
+  "about":"",  
+},
+{
+  "name":"Shrey Nagda",
+  "email":"shreynagda2714@gmail.com",
+  "phone no.":9405321984,
+  "password": "22104045",
+  "profile_pic":"",
+  "about":"",  
+},
+{
+  "name":"Ojas Patrikar"
+  "email":"ojaspatrikar15@gmail.com"
+  "phone no.":8085846892,
+  "password": "22104048",
+  "profile_pic":"",
+  "about":"",
+},
+{
+  "name":"Pritam Ninganaik"
+  "email":"pritamninganaik007@gmail.com"
+  "phone no.":7972797102,
+  "password": "22104095",
+  "profile_pic":"",
+  "about":"",
+},
+{
+  "name":"Chinamyee Sadalgekar"
+  "email":"chinmayeekedar@gmail.com"
+  "phone no.":9819447740,
+  "password": "22104202",
+  "profile_pic":"",
+  "about":"",
+},
+{
+  "name":"Aryan Pardesi"
+  "email":"aryanpardesi@gmail.com"
+  "phone no.":9423378600
+  "password": "22104064",
+  "profile_pic":"",
+  "about":"",
+}
+]
