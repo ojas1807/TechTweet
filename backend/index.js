@@ -5,6 +5,7 @@ import { configDotenv } from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 import userRouter from "./routes/user.js";
 import postRouter from "./routes/postroute.js";
+import projectRouter from "./routes/projectroute.js";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,7 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
   }); 
   app.use("/user", userRouter);
   app.use("/post",postRouter);
+  app.use("/project",projectRouter);
   
   // app.use("/user", userRouter);
   

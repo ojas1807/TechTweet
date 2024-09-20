@@ -1,4 +1,5 @@
 const userRef = "Users";
 const postRef = "Posts";
-
-export { userRef, postRef };
+const projectRef = "Projects";
+export { userRef, postRef, projectRef };
+ 
