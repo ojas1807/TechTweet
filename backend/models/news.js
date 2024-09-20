@@ -12,4 +12,3 @@ const newsSchema=mongoose.Schema({
 
 const News=mongoose.model(newsRef,newsSchema);
 export default News;
-
