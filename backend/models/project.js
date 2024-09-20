@@ -7,6 +7,7 @@ const projectSchema = mongoose.Schema({
   projectDescription: { type: String, required: true },
   tags: [{ type: String }],
   likes: { type: Number, default: 0 },
+  liked_by: [{ type: mongoose.Schema.Types.ObjectId, ref: userRef }],
   comments: [{ comment: { type: String }, user: { type: mongoose.Schema.Types.ObjectId, ref: userRef } }],
   techstack:[{type:String}],
   workflow:{type:String},
@@ -14,4 +15,4 @@ const projectSchema = mongoose.Schema({
 
 const Project = mongoose.model(projectRef, projectSchema);
 export default Project;
- //comments me nam dhik na chaheye jo user ka nam think about it
+ //comments me nam dhik na chaheye jo user ka nam think about it 
