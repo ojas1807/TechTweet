@@ -7,15 +7,17 @@ import HomePage from "./Home";
 
 function App() {
   return (
-    <>
-      <Navbar1 />
+    <><Navbar1 />
+    <div className="flex">
+      
       <Sidebar className="w-1/4"/>
-      <div className="flex max-w-full mx-0 h-screen">
-        <div className="w-3/4">
+      <div className="flex max-w-full mx-0 ">
+        <div >
           <Routes>
             <Route path="/" element={<HomePage />} />
           </Routes>
         </div>
+      </div>
       </div>
     </>
   );
