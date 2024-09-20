@@ -8,8 +8,8 @@ const postRouter = Router();
 //   const post = await Post.find();
 
 //   res.json(post);
-// });
-
+// }); 
+  
 postRouter.get("/", async (req, res) => {
   try {
     const { user_id } = req.query;  
@@ -18,12 +18,19 @@ postRouter.get("/", async (req, res) => {
     const posts = await Post.find();
     //now i want to sort the post based on most likes and new posts
 
-    const algopost=posts.sort((a, b) => {
-      if (a.likes === b.likes) {
+    
+    // Sort the posts based on creation time and likes
+    const algopost = posts.sort((a, b) => {
+      // Compare creation time (newest first)
+      if (b.createdAt.getTime() !== a.createdAt.getTime()) {
         return b.createdAt - a.createdAt;
       }
+      // If createdAt is the same, compare likes (most liked first)
       return b.likes - a.likes;
     });
+    
+    
+  
 
 res.json(algopost);
 
