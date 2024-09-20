@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { projectRef } from "../utils/strings.js";
+import { projectRef, userRef } from "../utils/strings.js";
 
 
 const projectSchema = mongoose.Schema({
@@ -7,10 +7,11 @@ const projectSchema = mongoose.Schema({
   projectDescription: { type: String, required: true },
   tags: [{ type: String }],
   likes: { type: Number, default: 0 },
-  comments: [{ type: String }],
+  comments: [{ comment: { type: String }, user: { type: mongoose.Schema.Types.ObjectId, ref: userRef } }],
   techstack:[{type:String}],
   workflow:{type:String},
-});
+},{timestamps:true});
 
 const Project = mongoose.model(projectRef, projectSchema);
 export default Project;
+ //comments me nam dhik na chaheye jo user ka nam think about it
