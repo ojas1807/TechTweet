@@ -10,19 +10,19 @@ import AlumniStories from "./comps/aluministori"; // Ensure the correct path
 import AboutUs from "./comps/aboutUs";
 import LoginForm from "./auth/login.jsx";
 import Signup from "./auth/signup.jsx";
+import ProfilePage from "./Profle.jsx";
 
 function App() {
   const location = useLocation();
 
-  const hideSidebar = ['/login', '/signup'].includes(location.pathname);
+  const hideSidebar = ["/login", "/signup"].includes(location.pathname);
 
   return (
     <>
-    <Navbar1 />
-    <div className="flex flex-col lg:flex-row">
-      
-    {!hideSidebar && <Sidebar className="lg:w-64 w-full"/>}
-        <div className="flex-1 w-full max-w-full lg:pl-4" >
+      <Navbar1 />
+      <div className="flex flex-col lg:flex-row">
+        {!hideSidebar && <Sidebar className="lg:w-64 w-full" />}
+        <div className="flex-1 w-full max-w-full lg:pl-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/news" element={<NewsPortal />} />
@@ -30,7 +30,8 @@ function App() {
             <Route path="/alumniStories" element={<AlumniStories />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/signup" element={<Signup />}/>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
       </div>

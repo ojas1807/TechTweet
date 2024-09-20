@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 
 import Posts from "./common/Posts";
 import CreatePost from "./common/CreatePost";
-import api from "./axios";
+import api from "./utils/axios";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [feedType, setFeedType] = useState("forYou");
+
+  const navigate = useNavigate();
   useEffect(() => {
+    if (!window.localStorage.getItem("id")) {
+      console.log("Login again ");
+      navigate("/login");
+    }
     api.get("/").then((res) => {
       console.log(res);
     });
