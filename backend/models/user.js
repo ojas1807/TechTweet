@@ -9,7 +9,10 @@ const userSchema = mongoose.Schema({
   profile_pic: { type: String, default: "" },
   about: { type: String },
   posts: [{ type: mongoose.Schema.ObjectId, ref: postRef }],
+  liked_post: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
+
 });
 
 const User = mongoose.model(userRef, userSchema);
 export default User;
+ 
