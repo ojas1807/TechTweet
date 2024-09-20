@@ -5,7 +5,7 @@ const userRouter = Router();
 
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.body);
   if (!email || !password) {
     return res.status(422).send("Missing required fields");
   }
@@ -15,7 +15,9 @@ userRouter.post("/login", async (req, res) => {
       return res.status(404).send("User not found");
     }
     if (currentUser.password == password) {
-      return res.status(200).send("Login Successful - " + currentUser._id);
+      return res
+        .status(200)
+        .send({ message: "Login successful!", id: currentUser.id });
     }
   } catch (err) {
     return res.status(501).send("An error occurred " + err);
@@ -59,7 +61,7 @@ userRouter.patch("/update/:id", async (req, res) => {
 
 userRouter.delete("/delete/:id", async (req, res) => {
   const { _id } = req.params;
- 
+
   try {
     const r = await User.deleteOne({ id: _id });
     console.log(r);
@@ -68,6 +70,16 @@ userRouter.delete("/delete/:id", async (req, res) => {
     console.log(err);
     return res.status(501).send("An error occurred!");
   }
+});
+
+userRouter.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findOne({ _id: id });
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+  console.log(user);
+  res.status(200).send(user);
 });
 
 export default userRouter;
