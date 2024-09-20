@@ -10,7 +10,7 @@ const projectSchema = mongoose.Schema({
   comments: [{ comment: { type: String }, user: { type: mongoose.Schema.Types.ObjectId, ref: userRef } }],
   techstack:[{type:String}],
   workflow:{type:String},
-});
+},{timestamps:true});
 
 const Project = mongoose.model(projectRef, projectSchema);
 export default Project;

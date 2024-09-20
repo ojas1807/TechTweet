@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
   posts: [{ type: mongoose.Schema.ObjectId, ref: postRef }],
   liked_post: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
 
-});
+},{timestamps:true});
 
 const User = mongoose.model(userRef, userSchema);
 export default User;
