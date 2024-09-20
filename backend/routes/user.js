@@ -19,7 +19,7 @@ userRouter.post("/login", async (req, res) => {
       return res.status(404).send("User not found");
     }
     if (currentUser.password == password) {
-      return res.status(200).send("Login Successful");
+      return res.status(200).send("Login Successful - " + currentUser._id);
     }
   } catch (err) {
     return res.status(501).send("An error occurred " + err);
@@ -41,12 +41,30 @@ userRouter.post("/register", async (req, res) => {
       return res.status(422).send("Error registering user. Try Again!");
     }
     user.save();
-    return res.status(200).send("User registered successfully!");
+    return res.status(200).send("User registered successfully! - " + user._id);
   } catch (err) {
     return res.status(409).send("An error occurred!");
   }
 });
 
-// userRouter.
+userRouter.post("/update", (req, res) => {
+  const { _id, ...updatedData } = req.body;
+  try {
+    User.updateOne({ _id }, { updatedData });
+    return res.status(200).send("User updated - " + _id);
+  } catch (err) {
+    return res.status(501).send("An error occurred!");
+  }
+});
+
+userRouter.post("/delete", (req, res) => {
+  const _id = req.body;
+  try {
+    User.deleteOne({ _id });
+    return res.status(200).send("User deleted! - " + _id);
+  } catch (err) {
+    return res.status(501).send("An error occurred!");
+  }
+});
 
 export default userRouter;
