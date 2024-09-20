@@ -47,18 +47,19 @@ userRouter.post("/register", async (req, res) => {
   }
 });
 
-userRouter.post("/update", (req, res) => {
-  const { _id, ...updatedData } = req.body;
+userRouter.patch("/update/:id", (req, res) => {
+  const { ...updatedData } = req.body;
+  const id = req.params;
   try {
-    User.updateOne({ _id }, { updatedData });
-    return res.status(200).send("User updated - " + _id);
+    User.updateOne({ id }, { updatedData });
+    return res.status(200).send("User updated - " + id);
   } catch (err) {
     return res.status(501).send("An error occurred!");
   }
 });
 
-userRouter.post("/delete", (req, res) => {
-  const _id = req.body;
+userRouter.delete("/delete/:id", (req, res) => {
+  const _id = req.params;
   try {
     User.deleteOne({ _id });
     return res.status(200).send("User deleted! - " + _id);
