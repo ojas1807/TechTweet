@@ -10,6 +10,7 @@ import newsRouter from "./routes/newsRouter.js";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 configDotenv();
 const port = process.env.PORT || 3000;
 cloudinary.config({
@@ -21,14 +22,14 @@ cloudinary.config({
 mongoose.connect(process.env.MONGO_URL).then(() => {
   app.get("/", (req, res) => {
     res.send("Hello World!");
-  }); 
+  });
   app.use("/user", userRouter);
-  app.use("/post",postRouter);
-  app.use("/project",projectRouter);
-  app.use("/news",newsRouter);
-  
+  app.use("/post", postRouter);
+  app.use("/project", projectRouter);
+  app.use("/news", newsRouter);
+
   // app.use("/user", userRouter);
-  
+
   app.post("/upload", async (req, res) => {
     // Use the uploaded file's name as the asset's public ID and
     // allow overwriting the asset with new versions
