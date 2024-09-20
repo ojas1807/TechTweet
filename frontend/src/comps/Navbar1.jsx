@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar1() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -14,17 +14,17 @@ export default function Navbar() {
   };
 
   return (
-    <div className='flex sticky top-0'>
+    <div className='flex sticky top-0 z-10'>
       {/* Navbar */}
       <div className="navbar bg-base-100">
         <div className="navbar-start">
-          {/* Hamburger Icon to Toggle Sidebar */}
           <div
             role="button"
             tabIndex={0}
             className="btn btn-ghost btn-circle md:hidden"
             onClick={toggleSidebar}
           >
+            asdf
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
