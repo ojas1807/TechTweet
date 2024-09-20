@@ -4,6 +4,7 @@ import cors from "cors";
 import { configDotenv } from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 import userRouter from "./routes/user.js";
+import postRouter from "./routes/postroute.js";
 
 const app = express();
 app.use(express.json());
@@ -18,9 +19,12 @@ cloudinary.config({
 mongoose.connect(process.env.MONGO_URL).then(() => {
   app.get("/", (req, res) => {
     res.send("Hello World!");
-  });
+  }); 
   app.use("/user", userRouter);
-
+  app.use("/post",postRouter);
+  
+  // app.use("/user", userRouter);
+  
   app.post("/upload", async (req, res) => {
     // Use the uploaded file's name as the asset's public ID and
     // allow overwriting the asset with new versions
