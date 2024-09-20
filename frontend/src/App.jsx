@@ -4,6 +4,8 @@ import Navbar from "./comps/Navbar";
 import Navbar1 from "./comps/Navbar1";
 import Sidebar from "./comps/Sidebar";
 import HomePage from "./Home";
+import NewsPortal from "./NewsPortal";
+import ProjectPitch from "./ProjectPitch";
 
 function App() {
   return (
@@ -15,6 +17,9 @@ function App() {
         <div >
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/news" element={<NewsPortal />} />
+            <Route path="/ProjectPitch" element={<ProjectPitch />} />
+
           </Routes>
         </div>
       </div>

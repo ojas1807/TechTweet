@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className='flex sticky top-0'>
       {/* Navbar */}
       <div className="navbar bg-base-100">
         <div className="navbar-start">
@@ -71,7 +72,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <div className="navbar-center">
-          <a className="btn btn-ghost text-xl">TechTweet</a>
+          <div className="btn btn-ghost text-xl"><Link to="/">TechTweet</Link></div>
         </div>
 
         {/* Search & Notifications */}
