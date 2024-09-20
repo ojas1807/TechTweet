@@ -3,9 +3,9 @@ import { postRef, userRef } from "../utils/strings.js";
 
 const postSchema = mongoose.Schema({
   
-  photos: [{ type: String }],
+  photos: { type: String },
   caption: { type: String },
-  type: { type: String, default: "post" },
+  type: { type: String, default: "post" }, 
   tags: [{ type: String }],
   likes: { type: Number, default: 0 },
   user_id: { type: mongoose.Schema.ObjectId, ref: userRef },
@@ -15,5 +15,5 @@ const postSchema = mongoose.Schema({
 },{timestamps:true});
 
 const Post = mongoose.model(postRef, postSchema);
-export default Post;
+export default Post; 
 
