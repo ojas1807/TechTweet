@@ -2,8 +2,9 @@ import { CiImageOn } from "react-icons/ci";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import api from "../axios"; // Your axios instance
+// import api from "../axios"; // Your axios instance
 
+import api from "../utils/axios";
 const CreatePost = () => {
     const [text, setText] = useState("");
     const [img, setImg] = useState(null);

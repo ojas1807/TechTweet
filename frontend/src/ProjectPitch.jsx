@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import api from './axios';
+import api from './utils/axios';
+// import api from './axios';
 
 const ProjectPitch = () => {
     const [searchTerm, setSearchTerm] = useState('');
