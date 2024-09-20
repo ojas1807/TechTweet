@@ -50,7 +50,7 @@ res.json(algopost);
 
 postRouter.post("/create", async (req, res) => {
   try {
-    const { caption, type, tags, photos, user_id } = req.body;
+    const { caption, type, tags, photos, user_id } =  req.body;
 
     // Create a new post
     const newPost = new Post({

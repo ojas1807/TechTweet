@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import api from './utils/axios';
+// import api from './axios';
 
 const ProjectPitch = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [projects, setProjects] = useState([]);
+    const [datafrombackend, setdatafrombackend] = useState([]);
+
+    useEffect(() => {
+        api.get('/project').then((res) => {
+            console.log(res.data);
+            setdatafrombackend(res.data);
+        });
+    }, [datafrombackend,projects]);
+
     const [newProject, setNewProject] = useState({
-        title: '',
-        description: '',
+        projectTitle: '',
+        projectDescription: '',
         techstack: '',
         github_link: '',
+         user_id:"66ed70c6c2c03d54ed28abf5",
+
         tags: '',
     });
 
@@ -20,17 +33,23 @@ const ProjectPitch = () => {
         setNewProject({ ...newProject, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setProjects([...projects, newProject]);
-        setNewProject({
-            title: '',
-            description: '',
-            techstack: '',
-            github_link: '',
-            tags: '',
-        });
+        // setNewProject({
+        //     projectTitle: '',
+        //     projectDescription: '',
+        //     techstack: '',
+        //     github_link: '',
+        //     tags: '',
+        // });
+     const responce=  await api.post('/project/create', newProject);
+     const data=await responce.data;
+     console.log(data);
+     
     };
+
+    
 
     return (
         <div className="flex flex-col min-h-screen w-full bg-gray-100">
@@ -65,21 +84,21 @@ const ProjectPitch = () => {
                     <h2 className="text-3xl font-bold mb-6">Pitch Your Idea</h2>
                     <form onSubmit={handleSubmit} className="bg-gray-50 p-6 shadow-md rounded-lg">
                         <div className="mb-6">
-                            <label className="block text-sm font-bold mb-2" htmlFor="title">Project Title</label>
+                            <label className="block text-sm font-bold mb-2" htmlFor="projectTitle">Project Title</label>
                             <input
                                 type="text"
-                                name="title"
-                                value={newProject.title}
+                                name="projectTitle"
+                                value={newProject.projectTitle}
                                 onChange={handleInputChange}
                                 required
                                 className="input input-bordered w-full"
                             />
                         </div>
                         <div className="mb-6">
-                            <label className="block text-sm font-bold mb-2" htmlFor="description">Description</label>
+                            <label className="block text-sm font-bold mb-2" htmlFor="projectDescription">Description</label>
                             <textarea
-                                name="description"
-                                value={newProject.description}
+                                name="projectDescription"
+                                value={newProject.projectDescription}
                                 onChange={handleInputChange}
                                 required
                                 className="textarea textarea-bordered w-full"
@@ -120,10 +139,13 @@ const ProjectPitch = () => {
 
                     <h2 className="text-3xl font-bold mt-8">Project Ideas</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                        {projects.filter(project => project.title.toLowerCase().includes(searchTerm.toLowerCase())).map((project, index) => (
+
+
+                        {/* //here  projects will be shown */}
+                        {datafrombackend.map((project, index) => (
                             <div key={index} className="bg-white shadow-md p-4 rounded transition-transform transform hover:scale-105">
-                                <h3 className="text-xl font-semibold">{project.title}</h3>
-                                <p className="text-gray-700 mt-2">{project.description}</p>
+                                <h3 className="text-xl font-semibold">{project.projectTitle}</h3>
+                                <p className="text-gray-700 mt-2">{project.projectDescription}</p>
                                 {project.techstack && (
                                     <div className="mt-4">
                                         <p>Tech Stack: {project.techstack}</p>
@@ -131,7 +153,7 @@ const ProjectPitch = () => {
                                 )}
                                 {project.github_link && (
                                     <div className="mt-4">
-                                        <a href={project.github_link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Github Link</a>
+                                        <a href={project.github_link} target="_blank"  className="text-blue-600 underline">Github Link</a>
                                     </div>
                                 )}
                                 {project.tags && (
