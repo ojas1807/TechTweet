@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CreateForm from "../alimunai/createForm";
 import api from "../utils/axios";
 import Post from "../common/Post";
+import { BiLoader } from "react-icons/bi";
 
 const AlumniStories = () => {
   const [alumniData, setAlumniData] = useState([]);
@@ -10,11 +11,12 @@ const AlumniStories = () => {
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState(0);
   const [showCreateForm, setShowCreateForm] = useState(false); // State to toggle CreateForm
-    
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     api.get("/post/alumini").then((res) => {
       console.log(res);
       setAlumniData(res.data);
+      setLoading(false);
     });
   }, []);
 
@@ -45,6 +47,14 @@ const AlumniStories = () => {
     setShowCreateForm(!showCreateForm); // Toggle form visibility
   };
 
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center">
+        <BiLoader className="animate-spin mx-auto h-10 w-10 text-blue-600" />
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen flex flex-col bg-[#E6F2F4]">
       {/* Header */}
@@ -67,7 +77,7 @@ const AlumniStories = () => {
       <div className="flex-1 flex justify-center  ">
         <button
           onClick={toggleCreateForm}
-          className="bg-blue-600 text-white px-6 py-3 h-12 rounded-md shadow-md hover:bg-blue-700 transition duration-200"
+          className="bg-blue-600 text-white px-6 py-3 h-12 rounded-md shadow-md hover:bg-blue-500 transition duration-200"
         >
           {showCreateForm ? "Hide Create Form" : "Show Create Form"}
         </button>
