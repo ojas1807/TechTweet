@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   const handleLogin = (ev) => {
     ev.preventDefault();
-    console.log(email, password);
+    // console.log(email, password);
     api.post("/user/login", { email, password }).then((res) => {
       // console.log(res);
       if (res.status != 200) {

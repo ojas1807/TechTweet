@@ -8,17 +8,16 @@ const postRouter = Router();
 //   const post = await Post.find();
 
 //   res.json(post);
-// }); 
-  
+// });
+
 postRouter.get("/", async (req, res) => {
   try {
-    const { user_id } = req.query;  
+    const { user_id } = req.query;
 
     // Fetch all posts
     const posts = await Post.find();
     //now i want to sort the post based on most likes and new posts
 
-    
     // Sort the posts based on creation time and likes
     const algopost = posts.sort((a, b) => {
       // Compare creation time (newest first)
@@ -28,29 +27,18 @@ postRouter.get("/", async (req, res) => {
       // If createdAt is the same, compare likes (most liked first)
       return b.likes - a.likes;
     });
-    
-    
-  
 
-res.json(algopost);
-
+    res.json(algopost);
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
-
- 
-
-
-
-
-
-
-
 postRouter.post("/create", async (req, res) => {
   try {
-    const { caption,heading, type, tags, photos, user_id } =  req.body;
+    const { caption, heading, type, tags, photos, user_id } = req.body;
 
     // Create a new post
     const newPost = new Post({
@@ -80,10 +68,11 @@ postRouter.post("/create", async (req, res) => {
     // Respond with the newly created post
     res.json(newPost);
   } catch (error) {
-    res.status(500).json({ message: "Error creating post", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error creating post", error: error.message });
   }
 });
-
 
 postRouter.patch("/update/:id", async (req, res) => {
   const { caption, type, tags, photos, comments } = req.body;
@@ -135,7 +124,7 @@ postRouter.post("/like/:id", async (req, res) => {
     const post = await Post.findById(id);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
-    } 
+    }
 
     // Check if the post is already liked by the user
     if (post.liked_by.includes(user_id)) {
@@ -159,10 +148,11 @@ postRouter.post("/like/:id", async (req, res) => {
 
     res.json("Post liked successfully");
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
-
 
 postRouter.post("/unlike/:id", async (req, res) => {
   const { id } = req.params;
@@ -178,7 +168,7 @@ postRouter.post("/unlike/:id", async (req, res) => {
   if (!post.liked_by.includes(req.body.user_id)) {
     return res.status(400).json({ message: "Post not liked" });
   }
-  if(post.likes<=0){
+  if (post.likes <= 0) {
     return res.status(400).json({ message: "Post not liked" });
   }
   post.likes -= 1;

@@ -47,7 +47,7 @@ const ProjectPitch = () => {
     // });
     const responce = await api.post("/project/create", newProject);
     const data = await responce.data;
-    console.log(data);
+    // console.log(data);
   };
 
   return (
@@ -188,10 +188,6 @@ const ProjectPitch = () => {
               <div
                 key={index}
                 className="bg-white shadow-md p-4 rounded transition-transform transform hover:scale-105"
-                onClick={() => {
-                  console.log(project._id);
-                  navigate(`/project/${project._id}`);
-                }}
               >
                 <h3 className="text-xl font-semibold">
                   {project.projectTitle}
@@ -220,6 +216,8 @@ const ProjectPitch = () => {
                     <p>Tags: {project.tags}</p>
                   </div>
                 )}
+
+                <div className="flex"></div>
               </div>
             ))}
           </div>

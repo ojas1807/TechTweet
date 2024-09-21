@@ -11,7 +11,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!window.localStorage.getItem("id")) {
-      console.log("Login again ");
+      // console.log("Login again ");
       navigate("/login");
     }
   });
