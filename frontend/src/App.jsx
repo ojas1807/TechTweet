@@ -11,6 +11,7 @@ import AboutUs from "./comps/aboutUs";
 import LoginForm from "./auth/login.jsx";
 import Signup from "./auth/signup.jsx";
 import ProfilePage from "./Profle.jsx";
+import ProjectPitchItem from "./ProjectPitchItem.jsx";
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/project/:id" element={<ProjectPitchItem />} />
           </Routes>
         </div>
       </div>

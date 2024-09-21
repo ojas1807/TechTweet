@@ -70,7 +70,7 @@ export default function Navbar1() {
           </div>
         </div>
 
-        <div className="navbar-start flex flex-1">
+        <Link to={"/"} className="navbar-start flex flex-1">
           <div
             tabIndex={0}
             role="button"
@@ -80,14 +80,8 @@ export default function Navbar1() {
               <img alt="Tailwind CSS Navbar component" src="/logo.jpg" />
             </div>
           </div>
-        </div>
-
-        {/* Logo */}
-        <div className="navbar-start hidden md:flex lg:flex">
-          <div className="btn btn-ghost text-xl">
-            <Link to="/">TechTweet</Link>
-          </div>
-        </div>
+          <div className="hidden md:block lg:block">TechTweet</div>
+        </Link>
 
         {/* Search & Notifications */}
         <div className="navbar-end">
