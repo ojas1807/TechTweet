@@ -13,16 +13,16 @@ import News from "../models/news.js";
     }
   }
   export const newsCreation= async (req, res) => {
-      const {  headline,
+      const { 
+         headline,
           description,
           image,
-          url, } = req.body;
+           } = req.body;
       const newPost = new News({
           headline,
           description,
           image,
-          url,
-     
+         
       });
       try {
           const post = await newPost.save();
