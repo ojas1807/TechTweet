@@ -156,6 +156,12 @@ export default function Navbar1() {
             </Link>
           </li>
           <li>
+            <Link to="/news" onClick={closeSidebar}>
+              <AiOutlineSmile />
+              News Portal
+            </Link>
+          </li>
+          <li>
             <Link to="/aboutUs" onClick={closeSidebar}>
               <AiOutlineSmile />
               About Us
