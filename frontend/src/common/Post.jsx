@@ -49,7 +49,10 @@ const Post = ({ post }) => {
           }
         });
     } else {
-      setLikes(likes - 1);
+      if (likes >= 1) {
+        setLikes(likes - 1);
+        setIsLiked(false);
+      }
       await api
         .post(`/post/unlike/${post._id}`, { user_id: currentUserId })
         .then((res) => {

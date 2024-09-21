@@ -168,6 +168,7 @@ postRouter.post("/unlike/:id", async (req, res) => {
   if (!post.liked_by.includes(req.body.user_id)) {
     return res.status(400).json({ message: "Post not liked" });
   }
+  post.liked_by.pull(user_id);
   if (post.likes <= 0) {
     return res.status(400).json({ message: "Post not liked" });
   }
