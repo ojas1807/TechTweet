@@ -36,6 +36,16 @@ postRouter.get("/", async (req, res) => {
   }
 });
 
+postRouter.get("/alumini", async (req, res) => {
+  try {
+    const posts = await Post.find({ type: "alumni" });
+    console.log(posts);
+    return res.status(200).send(posts);
+  } catch (err) {
+    res.status(501).send(err);
+  }
+});
+
 postRouter.post("/create", async (req, res) => {
   try {
     const { caption, heading, type, tags, photos, user_id } = req.body;
