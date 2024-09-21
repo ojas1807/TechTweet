@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "./utils/axios";
 import { useNavigate } from "react-router-dom";
+import { FaRegHeart } from "react-icons/fa";
+import ProjectPitchItem from "./ProjectPitchItem";
 // import api from './axios';
 
 const ProjectPitch = () => {
@@ -34,6 +36,8 @@ const ProjectPitch = () => {
     const { name, value } = e.target;
     setNewProject({ ...newProject, [name]: value });
   };
+
+  const handleLike = () => {};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -184,42 +188,10 @@ const ProjectPitch = () => {
           <h2 className="text-3xl font-bold mt-8">Project Ideas</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-4">
             {/* //here  projects will be shown */}
-            {datafrombackend.map((project, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-md p-4 rounded transition-transform transform hover:scale-105"
-              >
-                <h3 className="text-xl font-semibold">
-                  {project.projectTitle}
-                </h3>
-                <p className="text-gray-700 mt-2 line-clamp-6">
-                  {project.projectDescription}
-                </p>
-                {project.techstack && (
-                  <div className="mt-4">
-                    <p>Tech Stack: {project.techstack}</p>
-                  </div>
-                )}
-                {project.github_link && (
-                  <div className="mt-4">
-                    <a
-                      href={project.github_link}
-                      target="_blank"
-                      className="text-blue-600 underline"
-                    >
-                      Github Link
-                    </a>
-                  </div>
-                )}
-                {project.tags && (
-                  <div className="mt-4">
-                    <p>Tags: {project.tags}</p>
-                  </div>
-                )}
-
-                <div className="flex"></div>
-              </div>
-            ))}
+            {datafrombackend.map((project, index) => {
+              console.log(project);
+              return <ProjectPitchItem project={project} index={index} />;
+            })}
           </div>
         </main>
       </div>
