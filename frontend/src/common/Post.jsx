@@ -101,7 +101,7 @@ const Post = ({ post }) => {
       <div className="flex gap-2 items-start p-4 border-b border-gray-700 md: w-[500px] lg:w-[500px]">
         <div className="avatar">
           <Link
-            to={`/profile/${user.id}`}
+            to={`/profile`}
             className="w-8 rounded-full overflow-hidden"
           >
             <img src={user.profile_pic || "/avatar-placeholder.png"} />
@@ -109,11 +109,11 @@ const Post = ({ post }) => {
         </div>
         <div className="flex flex-col flex-1">
           <div className="flex gap-2 items-center">
-            <Link to={`/profile/${user._id}`} className="text-lg font-bold">
+            <Link to={`/profile`} className="text-lg font-bold">
               {user.name}
             </Link>
             <span className="text-gray-700 flex gap-2 text-sm">
-              <Link to={`/profile/${user.email}`} className="text-md">
+              <Link to={`/profile`} className="text-md">
                 @{user.email}
               </Link>
               <span>{new Date(post.createdAt).toLocaleDateString()}</span>
