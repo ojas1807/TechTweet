@@ -3,6 +3,7 @@ import { postRef, userRef } from "../utils/strings.js";
 
 const postSchema = mongoose.Schema(
   {
+    heading: { type: String },
     photos: { type: String },
     caption: { type: String },
     type: { type: String, default: "post" },
