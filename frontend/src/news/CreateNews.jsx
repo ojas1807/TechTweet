@@ -113,7 +113,7 @@ const CreateNews = () => {
               accept="image/*"
               onChange={handleImageChange}
               ref={imgRef}
-              className="input input-bordered w-full"
+              className="input m-auto pt-2 input-bordered w-full"
             />
           </div>
           <button type="submit" className="btn btn-primary w-full" disabled={isPending}>

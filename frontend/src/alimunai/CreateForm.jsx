@@ -77,7 +77,7 @@ const CreateForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center  items-center min-h-screen">
       <div className="w-full max-w-lg p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-3xl font-bold mb-6 text-center">Create Alumni Post</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -95,7 +95,7 @@ const CreateForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-bold mb-2" htmlFor="photos">
+            <label className="block text-sm font-bold  mb-2" htmlFor="photos">
               Photo (Upload)
             </label>
             <input
@@ -103,7 +103,7 @@ const CreateForm = () => {
               accept="image/*"
               onChange={handleImageChange}
               ref={imgRef}
-              className="input input-bordered w-full"
+              className="input m-auto pt-2 input-bordered w-full"
             />
           </div>
           <div>
