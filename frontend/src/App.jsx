@@ -10,7 +10,6 @@ import AlumniStories from "./comps/aluministori"; // Ensure the correct path
 import AboutUs from "./comps/aboutUs";
 import LoginForm from "./auth/login.jsx";
 import Signup from "./auth/signup.jsx";
-import '@fontsource/josefin-sans';  // If you're using a bundler like Webpack
 
 
 function App() {
