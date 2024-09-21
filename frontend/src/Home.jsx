@@ -16,6 +16,10 @@ const HomePage = () => {
     }
   });
 
+  useEffect(() => {
+    console.log(document.body.textContent);
+  }, []);
+
   return (
     <>
       <div className="flex-[4_4_0] mr-auto border-r border-gray-700 min-h-screen">

@@ -12,6 +12,7 @@ import LoginForm from "./auth/login.jsx";
 import Signup from "./auth/signup.jsx";
 import ProfilePage from "./Profle.jsx";
 import ProjectPitchItem from "./ProjectPitchItem.jsx";
+import { useEffect } from "react";
 
 function App() {
   const location = useLocation();

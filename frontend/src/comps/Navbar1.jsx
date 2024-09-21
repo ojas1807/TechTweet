@@ -80,7 +80,7 @@ export default function Navbar1() {
               <img alt="Tailwind CSS Navbar component" src="/logo.jpg" />
             </div>
           </div>
-          <div className=" hidden md:block lg:block">TechTweet</div>
+          <div className="hidden md:block lg:block">TechTweet</div>
         </Link>
 
         {/* Search & Notifications */}
@@ -160,9 +160,7 @@ export default function Navbar1() {
         </div>
         <ul className="p-4 flex flex-col space-y-4">
           <li>
-            <Link to="/news" onClick={closeSidebar}>
-              <FcNews /> News Portal
-            </Link>
+            <div id="google_translate_element"></div>
           </li>
           <li>
             <Link to="/alumniStories" onClick={closeSidebar}>

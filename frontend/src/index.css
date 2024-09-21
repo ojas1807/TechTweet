@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#google_translate_element {
+  display: inline-block;
+  background-color: #007bff; /* Customize your button color */
+  color: white;
+  padding: 10px 20px;
+  font-family: "Josefin Sans", sans-serif; /* Match your website's font */
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+#google_translate_element:hover {
+  background-color: #0056b3; /* Button hover color */
+}
+
+.goog-te-banner-frame.skiptranslate,
+.goog-te-menu-value span,
+.goog-te-gadget-icon {
+  display: none !important; /* Hide unnecessary elements */
+}
+
+.goog-te-combo {
+  display: none !important; /* Hide the default dropdown */
+}
+
+#google_translate_element:after {
+  content: "Translate"; /* Display your custom button text */
+}
+
+.goog-logo-link {
+  display: none !important; /* Hide the Google branding */
+}
+
+.goog-te-gadget {
+  color: transparent !important; /* Hide default text */
+}
