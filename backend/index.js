@@ -7,10 +7,11 @@ import userRouter from "./routes/user.js";
 import postRouter from "./routes/postroute.js";
 import projectRouter from "./routes/projectroute.js";
 import newsRouter from "./routes/newsRouter.js";
-import multer from 'multer';
+import multer from "multer";
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cors());
 configDotenv();
 const port = process.env.PORT || 3000;
@@ -21,7 +22,7 @@ cloudinary.config({
 });
 
 mongoose.connect(process.env.MONGO_URL).then(() => {
-  app.get("/", (req, res) => { 
+  app.get("/", (req, res) => {
     res.send("Hello World!");
   });
   app.use("/user", userRouter);
@@ -31,66 +32,53 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 
   // app.use("/user", userRouter);
 
+  //   app.post("/upload", async (req, res) => {
+  //     const options = {
+  //         use_filename: true,
+  //         unique_filename: false,
+  //         overwrite: true,
+  //     };
 
-//   app.post("/upload", async (req, res) => {
-//     const options = {
-//         use_filename: true,
-//         unique_filename: false,
-//         overwrite: true,
-//     };
+  //     try {
+  //         const result = await cloudinary.uploader.upload(req.body.image, options);
+  //         console.log(result);
+  //         res.json(result.secure_url); // Return the secure URL of the uploaded image
+  //     } catch (error) {
+  //         console.error(error);
+  //         res.status(500).json({ message: "Error uploading image" });
+  //     }
+  // });
 
-//     try {
-//         const result = await cloudinary.uploader.upload(req.body.image, options);
-//         console.log(result);
-//         res.json(result.secure_url); // Return the secure URL of the uploaded image
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: "Error uploading image" });
-//     }
-// });
+  // Multer setup for file uploads
+  const storage = multer.memoryStorage();
+  const upload = multer({ storage });
 
-
-
-
-
-// Multer setup for file uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
-app.post('/upload', upload.single('file'), async (req, res) => {
-  
-
+  app.post("/upload", upload.single("file"), async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).json({ error: "File not found" });
-        }
+      if (!req.file) {
+        return res.status(400).json({ error: "File not found" });
+      }
 
-        const result = await new Promise((resolve, reject) => {
-            const uploadStream = cloudinary.uploader.upload_stream(
-                
-                (error, result) => {
-                    if (error) reject(error);
-                    else resolve(result);
-                }
-            );
+      const result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
 
-            uploadStream.end(req.file.buffer);
-        });
+        uploadStream.end(req.file.buffer);
+      });
 
-        return res.status(200).json({
-            publicId: result.public_id,
-            secureUrl: result.secure_url, // Return the secure URL as well
-        });
-
+      return res.status(200).json({
+        publicId: result.public_id,
+        secureUrl: result.secure_url, // Return the secure URL as well
+      });
     } catch (error) {
-        console.error("Upload image failed", error);
-        return res.status(500).json({ error: "Upload image failed" });
+      console.error("Upload image failed", error);
+      return res.status(500).json({ error: "Upload image failed" });
     }
-});
-
-
-
-
+  });
 
   app.post("/uploadany", async (req, res) => {
     console.log("requsest came here ");

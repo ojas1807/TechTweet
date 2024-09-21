@@ -6,14 +6,13 @@ import { POSTS } from "./dummy";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  //fetching the post from /post
   const fetchPosts = async () => {
     const response = await api.get("/post");
     setPosts(response.data);
   };
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [posts]);
   const isLoading = false;
 
   return (

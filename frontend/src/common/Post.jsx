@@ -5,35 +5,68 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import api from "../utils/axios";
 
 const Post = ({ post }) => {
-  console.log(post);
+  const currentUserId = window.localStorage.getItem("id");
+  var isMyPost = post.user_id == currentUserId;
+
   const [user, setUser] = useState({});
-  const isLiked = false;
+  const [isLiked, setIsLiked] = useState(false);
+  const [likes, setLikes] = useState(post.likes);
 
-  const isMyPost = true;
+  useEffect(() => {
+    // console.log(post.liked_by.includes(currentUserId));
+    // setIsLiked(post.liked_by.includes(currentUserId));
+    const liked_by = post.liked_by;
+    console.log(liked_by);
+    setIsLiked(liked_by.includes(currentUserId));
+  }, []);
 
-  const formattedDate = "1h";
-
-  const isCommenting = false;
-
-  const handleDeletePost = () => {};
+  const handleDeletePost = () => {
+    if (post.user_id == window.localStorage.getItem("id")) {
+      console.log("Delete");
+      if (confirm("Do you want to delete post?")) {
+        api.delete(`/post/delete/${post._id}`).then((res) => {
+          alert(res.data);
+        });
+      }
+    }
+  };
 
   const handlePostComment = (e) => {
     e.preventDefault();
   };
-  const handleLikePost = () => {};
+  const handleLikePost = async () => {
+    if (!isLiked) {
+      setLikes(likes + 1);
+      setIsLiked(true);
+      await api
+        .post(`/post/like/${post._id}`, { user_id: currentUserId })
+        .then((res) => {
+          if (res.status != 200) {
+            setLikes(likes - 1);
+          }
+        });
+    } else {
+      setLikes(likes - 1);
+      await api
+        .post(`/post/unlike/${post._id}`, { user_id: currentUserId })
+        .then((res) => {
+          if (res.status != 200) {
+            setLikes(likes + 1);
+          }
+        });
+    }
+  };
   useEffect(() => {
-    console.log(post.user_id);
     api.get(`/user/${post.user_id}`).then((res) => {
       setUser(res.data);
     });
   }, []);
   return (
     <>
-      <div className="flex gap-2 items-start p-4 border-b border-gray-700">
+      <div className="flex gap-2 items-start p-4 border-b border-gray-700 md: w-[500px] lg:w-[500px]">
         <div className="avatar">
           <Link
             to={`/profile/${user.id}`}
@@ -44,13 +77,14 @@ const Post = ({ post }) => {
         </div>
         <div className="flex flex-col flex-1">
           <div className="flex gap-2 items-center">
-            <Link to={`/profile/${user._id}`} className="font-bold">
+            <Link to={`/profile/${user._id}`} className="text-lg font-bold">
               {user.name}
             </Link>
-            <span className="text-gray-700 flex gap-1 text-sm">
-              <Link to={`/profile/${user.email}`}>@{user.email}</Link>
-              <span>·</span>
-              <span>{formattedDate}</span>
+            <span className="text-gray-700 flex gap-2 text-sm">
+              <Link to={`/profile/${user.email}`} className="text-md">
+                @{user.email}
+              </Link>
+              <span>{new Date(post.createdAt).toLocaleDateString()}</span>
             </span>
             {isMyPost && (
               <span className="flex justify-end flex-1">
@@ -65,17 +99,17 @@ const Post = ({ post }) => {
             <div className="overflow-x-hidden text-ellipsis text-clip line-clamp-1">
               {post.caption}
             </div>
-            {post.img && (
+            {post.photos && (
               <img
-                src={post.img}
+                src={post.photos}
                 className="h-80 object-contain rounded-lg border border-gray-700"
-                alt=""
+                alt="phoyo"
               />
             )}
           </div>
           <div className="flex justify-between mt-3">
             <div className="flex gap-4 items-center w-2/3 justify-between">
-              <div
+              {/* <div
                 className="flex gap-1 items-center cursor-pointer group"
                 onClick={() =>
                   document
@@ -87,7 +121,7 @@ const Post = ({ post }) => {
                 <span className="text-sm text-slate-500 group-hover:text-sky-400">
                   {post.comments.length}
                 </span>
-              </div>
+              </div> */}
               {/* We're using Modal Component from DaisyUI */}
               {/* <dialog
                 id={`comments_modal${post._id}`}
@@ -150,12 +184,12 @@ const Post = ({ post }) => {
                   <button className="outline-none">close</button>
                 </form>
               </dialog> */}
-              <div className="flex gap-1 items-center group cursor-pointer">
+              {/* <div className="flex gap-1 items-center group cursor-pointer">
                 <BiRepost className="w-6 h-6  text-slate-500 group-hover:text-green-500" />
                 <span className="text-sm text-slate-500 group-hover:text-green-500">
                   0
                 </span>
-              </div>
+              </div> */}
               <div
                 className="flex gap-1 items-center group cursor-pointer"
                 onClick={handleLikePost}
@@ -172,12 +206,9 @@ const Post = ({ post }) => {
                     isLiked ? "text-pink-500" : ""
                   }`}
                 >
-                  {post.likes.length}
+                  {likes}
                 </span>
               </div>
-            </div>
-            <div className="flex w-1/3 justify-end gap-2 items-center">
-              <FaRegBookmark className="w-4 h-4 text-slate-500 cursor-pointer" />
             </div>
           </div>
         </div>
