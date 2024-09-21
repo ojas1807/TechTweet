@@ -14,6 +14,8 @@ const Post = ({ post }) => {
   const [user, setUser] = useState({});
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes);
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState(post.comments || []);
 
   useEffect(() => {
     // console.log(post.liked_by.includes(currentUserId));
@@ -67,6 +69,33 @@ const Post = ({ post }) => {
       setUser(res.data);
     });
   }, []);
+
+
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment) return;
+
+    try {
+      const response = await api.post(`/post/comment/${post._id}`, {
+        user_id: currentUserId,
+        comment: newComment,
+      });
+      
+      if (response.status === 200) {
+        setComments([...comments, { user_id: currentUserId, comment: newComment }]);
+        setNewComment("");
+      }
+    } catch (error) {
+      console.error("Failed to add comment:", error);
+    }
+  };
+
+
+
   return (
     <>
       <div className="flex gap-2 items-start p-4 border-b border-gray-700 md: w-[500px] lg:w-[500px]">
@@ -214,6 +243,26 @@ const Post = ({ post }) => {
               </div>
             </div>
           </div>
+            {/* Comments Section */}
+      <div className="mt-4">
+        <h4 className="text-lg font-semibold">Comments:</h4>
+        <ul className="list-disc pl-5">
+          {comments.map((comment, index) => (
+            <li key={index} className="text-gray-700 mt-1">{comment.comment}</li>
+          ))}
+        </ul>
+
+        <form onSubmit={handleCommentSubmit} className="mt-2 flex">
+          <input
+            type="text"
+            value={newComment}
+            onChange={handleCommentChange}
+            placeholder="Add a comment..."
+            className="border rounded-l-md p-2 flex-1"
+          />
+          <button type="submit" className="bg-blue-600 text-white px-4 rounded-r-md">Post</button>
+        </form>
+      </div>
         </div>
       </div>
     </>
