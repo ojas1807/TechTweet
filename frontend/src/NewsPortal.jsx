@@ -1,4 +1,5 @@
 import React from 'react';
+import CreateNews from './news/CreateNews';
 
 const NewsPortal = () => {
     return (
@@ -96,7 +97,13 @@ const NewsPortal = () => {
                         <a href="#" className="text-blue-600 hover:underline mt-4 inline-block">Read more</a>
                     </div>
                 </div>
-            </div>
+            </div> 
+
+<div>
+
+            <CreateNews />
+</div>
+
         </div>
     );
 };

@@ -1,14 +1,12 @@
 import { useState, useRef } from "react";
 import api from "../utils/axios";
 
+const CreateNews = () => {
+  const [newsPost, setNewsPost] = useState({
+    headline: "",
+    description: "",
+    image: "",
 
-const CreateForm = () => {
-  const [newPost, setNewPost] = useState({
-    heading: "",
-    photos: "",
-    caption: "",
-    type: "alumni",
-    user_id: localStorage.getItem("id"),
   });
 
   const [img, setImg] = useState(null);
@@ -18,7 +16,7 @@ const CreateForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewPost({ ...newPost, [name]: value });
+    setNewsPost({ ...newsPost, [name]: value });
   };
 
   const handleImageChange = (e) => {
@@ -37,22 +35,22 @@ const CreateForm = () => {
       reader.onloadend = async () => {
         base64Image = reader.result; // Get the base64 string
 
-        // Now, set the newPost state with the base64 image
+        // Now, set the newsPost state with the base64 image
         const postData = {
-          ...newPost,
-          photos: base64Image, // Use base64 image
+          ...newsPost,
+          image: base64Image, // Use base64 image
         };
 
-        // Create post with image
+        // Create news post with image
         try {
-          const response = await api.post("/post/create", postData);
+          const response = await api.post("/news/create", postData);
           console.log(response.data);
-          alert("Post created successfully");
-          setNewPost({ heading: "", photos: "", caption: "", type: "alumni", user_id: localStorage.getItem("id") });
+          alert("News post created successfully");
+          setNewsPost({ headline: "", description: "", image: "", user_id: localStorage.getItem("id") });
           setImg(null);
           imgRef.current.value = null;
         } catch (error) {
-          console.error("Error creating post", error);
+          console.error("Error creating news post", error);
           setIsError(true);
         } finally {
           setIsPending(false);
@@ -60,15 +58,15 @@ const CreateForm = () => {
       };
       reader.readAsDataURL(img); // Start reading the file as base64
     } else {
-      // Create post without image
+      // Create news post without image
       try {
-        const response = await api.post("/post/create", newPost);
+        const response = await api.post("/news/create", newsPost);
         console.log(response.data);
-        alert("Post created successfully");
-        setNewPost({ heading: "", photos: "", caption: "", type: "alumni", user_id: localStorage.getItem("id") });
+        alert("News post created successfully");
+        setNewsPost({ headline: "", description: "", image: "", user_id: localStorage.getItem("id") });
         imgRef.current.value = null;
       } catch (error) {
-        console.error("Error creating post", error);
+        console.error("Error creating news post", error);
         setIsError(true);
       } finally {
         setIsPending(false);
@@ -79,24 +77,36 @@ const CreateForm = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full max-w-lg p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center">Create Alumni Post</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center">Create News Post</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold mb-2" htmlFor="heading">
-              Heading
+            <label className="block text-sm font-bold mb-2" htmlFor="headline">
+              Headline
             </label>
             <input
               type="text"
-              name="heading"
-              value={newPost.heading}
+              name="headline"
+              value={newsPost.headline}
               onChange={handleInputChange}
               required
               className="input input-bordered w-full"
             />
           </div>
           <div>
-            <label className="block text-sm font-bold mb-2" htmlFor="photos">
-              Photo (Upload)
+            <label className="block text-sm font-bold mb-2" htmlFor="description">
+              Description
+            </label>
+            <textarea
+              name="description"
+              value={newsPost.description}
+              onChange={handleInputChange}
+              required
+              className="textarea textarea-bordered w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold mb-2" htmlFor="image">
+              Image (Upload)
             </label>
             <input
               type="file"
@@ -106,25 +116,14 @@ const CreateForm = () => {
               className="input input-bordered w-full"
             />
           </div>
-          <div>
-            <label className="block text-sm font-bold mb-2" htmlFor="caption">
-              Caption
-            </label>
-            <textarea
-              name="caption"
-              value={newPost.caption}
-              onChange={handleInputChange}
-              className="textarea textarea-bordered w-full"
-            />
-          </div>
           <button type="submit" className="btn btn-primary w-full" disabled={isPending}>
-            {isPending ? "Submitting..." : "Submit Post"}
+            {isPending ? "Submitting..." : "Submit News Post"}
           </button>
-          {isError && <p className="text-red-500 text-center">Error creating post, please try again.</p>}
+          {isError && <p className="text-red-500 text-center">Error creating news post, please try again.</p>}
         </form>
       </div>
     </div>
   );
 };
 
-export default CreateForm;
+export default CreateNews;
