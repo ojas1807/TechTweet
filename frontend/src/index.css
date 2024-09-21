@@ -4,7 +4,7 @@
 
 #google_translate_element {
   display: inline-block;
-  background-color: #007bff; /* Customize your button color */
+  background-color: #2563eb; /* Customize your button color */
   color: white;
   padding: 10px 20px;
   font-family: "Josefin Sans", sans-serif; /* Match your website's font */
@@ -13,13 +13,14 @@
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
+  margin: 10px;
 }
 
 #google_translate_element:hover {
-  background-color: #0056b3; /* Button hover color */
+  background-color: #3b82f6; /* Button hover color */
 }
 
 .goog-te-banner-frame.skiptranslate,

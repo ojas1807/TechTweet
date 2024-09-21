@@ -62,45 +62,10 @@ const ProjectPitch = () => {
           <div className="text-3xl font-bold text-blue-600">
             Project Pitching
           </div>
-          <input
-            type="text"
-            placeholder="Search Projects..."
-            value={searchTerm}
-            onChange={handleSearch}
-            className="input input-bordered w-full lg:w-1/2 xl:w-1/3"
-          />
         </div>
       </nav>
 
       <div className="flex flex-1 w-full container mx-auto px-6 py-6 flex-wrap">
-        {/* Sidebar */}
-        {/* <aside className="bg-gray-200 w-full lg:w-1/4 p-6 hidden lg:block">
-          <h2 className="text-lg font-bold mb-4">Categories</h2>
-          <ul>
-            <li>
-              <a href="#" className="hover:underline block py-2">
-                All Projects
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline block py-2">
-                Technology
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline block py-2">
-                Science
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline block py-2">
-                Arts
-              </a>
-            </li>
-          </ul>
-        </aside> */}
-
-        {/* Main Content */}
         <main className="flex-1 p-6 bg-white shadow-lg rounded-lg w-full max-w-full lg:max-w-3/4">
           <h2 className="text-3xl font-bold mb-6">Pitch Your Idea</h2>
           <form
@@ -180,7 +145,10 @@ const ProjectPitch = () => {
                 className="input input-bordered w-full"
               />
             </div>
-            <button type="submit" className="btn btn-primary w-full">
+            <button
+              type="submit"
+              className="btn bg-blue-600 hover:bg-blue-500 text-white text-lg w-full"
+            >
               Submit Idea
             </button>
           </form>
