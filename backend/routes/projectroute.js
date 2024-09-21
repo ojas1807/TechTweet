@@ -10,9 +10,9 @@ projectRouter.get("/", async (req, res) => {
   res.json(post);
 });
 
-projectRouter.post("/getproject/:id", async (req, res) => {
-  const { project_id } = req.body;
-  const post = await Project.findById(project_id);
+projectRouter.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const post = await Project.findById(id);
 
   res.json(post);
 });
