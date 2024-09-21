@@ -19,7 +19,7 @@ const projectSchema = mongoose.Schema(
     techstack: [{ type: String }],
     workflow: { type: String },
   },
-  { timestamps: true } 
+  { timestamps: true }
 );
 
 const Project = mongoose.model(projectRef, projectSchema);
