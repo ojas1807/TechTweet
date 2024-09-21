@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CreateForm from '../alimunai/createForm';
 
 const alumniData = [
     {
@@ -87,10 +88,16 @@ const AlumniStories = () => {
                             </button>
                         </div>
                     ))}
+
+                </div>
+                <div  >
+
+                    <CreateForm />
                 </div>
             </div>
+          
 
-            {/* Full Story Modal */}
+            {/* Full Story Modal
             {selectedStory && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-8 rounded-lg shadow-lg w-3/4 max-w-4xl">
@@ -103,7 +110,6 @@ const AlumniStories = () => {
                         <h2 className="text-2xl font-bold mb-4">{selectedStory.name}</h2>
                         <p className="text-gray-700 mb-6">{selectedStory.fullStory}</p>
 
-                        {/* Like and Comment Section */}
                         <div className="flex items-center mb-4">
                             <button
                                 className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -135,7 +141,9 @@ const AlumniStories = () => {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
+
+
         </div>
     );
 };
