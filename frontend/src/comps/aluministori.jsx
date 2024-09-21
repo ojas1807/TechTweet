@@ -10,7 +10,7 @@ const AlumniStories = () => {
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState(0);
   const [showCreateForm, setShowCreateForm] = useState(false); // State to toggle CreateForm
-
+    
   useEffect(() => {
     api.get("/post/alumini").then((res) => {
       console.log(res);
@@ -67,7 +67,7 @@ const AlumniStories = () => {
       <div className="flex-1 flex justify-center  ">
         <button
           onClick={toggleCreateForm}
-          className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition duration-200"
+          className="bg-blue-600 text-white px-6 py-3 h-12 rounded-md shadow-md hover:bg-blue-700 transition duration-200"
         >
           {showCreateForm ? "Hide Create Form" : "Show Create Form"}
         </button>

@@ -46,31 +46,10 @@ export default function Navbar1() {
           </div>
 
           {/* Dropdown Menu for Larger Screens */}
-          <div className="dropdown hidden md:block">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h7"
-                />
-              </svg>
-            </div>
-          </div>
+          <div className="dropdown hidden md:block"></div>
         </div>
 
-        <Link to={"/"} className="navbar-start flex flex-2">
+        <Link to={"/"} className="navbar-start px-2  flex flex-2">
           <div
             tabIndex={0}
             role="button"
@@ -80,7 +59,9 @@ export default function Navbar1() {
               <img alt="Tailwind CSS Navbar component" src="/logo.jpg" />
             </div>
           </div>
-          <div className="hidden md:block lg:block">TechTweet</div>
+          <div className=" hidden md:block font-extrabold text-3xl lg:block">
+            TechTweet
+          </div>
         </Link>
 
         {/* Search & Notifications */}
